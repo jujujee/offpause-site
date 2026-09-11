@@ -1,0 +1,140 @@
+/* Offpause — shared styles
+   Change the five values in :root to restyle the whole site. */
+
+:root {
+  --ground: #FBFAF7;
+  --surface: #FFFFFF;
+  --ink: #1F2421;
+  --ink-soft: #5C6660;
+  --rule: #E2E1DA;
+  --accent: #0E4B4D;
+  --max: 40rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #141816;
+    --surface: #1C211E;
+    --ink: #E8EBE7;
+    --ink-soft: #A2ACA6;
+    --rule: #2E3532;
+    --accent: #6FBDB9;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-inline: 22px;
+  padding-block: 64px 80px;
+}
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.brand {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 28px;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 5vw, 2.35rem);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: 1.12rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 40px 0 10px;
+}
+
+h3 { font-size: 1rem; font-weight: 600; margin: 26px 0 8px; }
+
+p { margin: 0 0 16px; }
+
+.lede { font-size: 1.1rem; color: var(--ink-soft); }
+
+ul { margin: 0 0 16px; padding-left: 1.25rem; }
+li { margin-bottom: 7px; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 40px 0;
+}
+
+.meta {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  margin-top: 44px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+}
+
+.contact {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 20px 22px;
+  margin: 32px 0;
+}
+.contact p { margin: 0 0 6px; }
+.contact p:last-child { margin-bottom: 0; }
+
+/* Purpose / lawful basis table — stacks on narrow screens */
+.roles { margin: 0 0 24px; }
+.role {
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--surface);
+  padding: 16px 18px;
+  margin-bottom: 10px;
+}
+.role h3 { margin: 0 0 8px; font-size: 0.98rem; }
+.role dl { margin: 0; display: grid; grid-template-columns: 7.5rem 1fr; gap: 4px 14px; }
+.role dt {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-top: 3px;
+}
+.role dd { margin: 0; font-size: 0.95rem; }
+
+@media (max-width: 30rem) {
+  .role dl { grid-template-columns: 1fr; gap: 2px; }
+  .role dt { padding-top: 8px; }
+  .wrap { padding-block: 44px 60px; }
+}
+
+.skip {
+  position: absolute; left: -9999px;
+}
+.skip:focus {
+  position: static; display: inline-block; margin-bottom: 12px;
+}
