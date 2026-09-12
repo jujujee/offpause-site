@@ -1,24 +1,36 @@
 /* Offpause — shared styles
-   Change the five values in :root to restyle the whole site. */
+   Used by both pages. Nothing here loads from another website:
+   no web fonts, no scripts, no trackers. That is deliberate —
+   the privacy notice says so.
+
+   To restyle the whole site, change the values in :root. */
 
 :root {
-  --ground: #FBFAF7;
-  --surface: #FFFFFF;
-  --ink: #1F2421;
-  --ink-soft: #5C6660;
-  --rule: #E2E1DA;
-  --accent: #0E4B4D;
-  --max: 40rem;
+  --ground:    #FAF7F0;
+  --surface:   #FFFFFF;
+  --ink:       #1C2320;
+  --ink-soft:  #5A645E;
+  --rule:      #E4E0D5;
+  --accent:    #0E4B4D;
+  --cta-bg:    #0E4B4D;
+  --shadow:    0 1px 2px rgba(28, 35, 32, 0.04), 0 6px 18px rgba(28, 35, 32, 0.045);
+  --max:       37rem;
+
+  --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Palatino Linotype",
+           Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+  --sans:  ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+           "Helvetica Neue", Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --ground: #141816;
-    --surface: #1C211E;
-    --ink: #E8EBE7;
-    --ink-soft: #A2ACA6;
-    --rule: #2E3532;
-    --accent: #6FBDB9;
+    --ground:   #141816;
+    --surface:  #1C211E;
+    --ink:      #E9ECE7;
+    --ink-soft: #A3ADA7;
+    --rule:     #2E3532;
+    --accent:   #7FC9C4;
+    --shadow:   none;
   }
 }
 
@@ -30,111 +42,188 @@ body {
   margin: 0;
   background: var(--ground);
   color: var(--ink);
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-               "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--sans);
   font-size: 17px;
-  line-height: 1.65;
+  line-height: 1.68;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+::selection { background: var(--accent); color: #FFFFFF; }
 
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
   padding-inline: 22px;
-  padding-block: 64px 80px;
+  padding-block: 72px 84px;
 }
 
-a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  transition: text-decoration-color 120ms ease;
+}
+a:hover { text-decoration-color: var(--accent); }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
+/* Wordmark. The two bars are the pause glyph from the favicon,
+   drawn in CSS so the page still loads no image files. */
 .brand {
-  font-size: 15px;
+  font-family: var(--sans);
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent);
-  margin: 0 0 28px;
+  margin: 0 0 36px;
+  display: flex;
+  align-items: center;
+  gap: 0.62em;
 }
+.brand::before {
+  content: "";
+  flex: none;
+  width: 0.66em;
+  height: 0.96em;
+  border-radius: 1.5px;
+  background: linear-gradient(to right,
+    currentColor 0 38%, transparent 38% 62%, currentColor 62% 100%);
+}
+.brand a { color: inherit; text-decoration: none; }
 
 h1 {
-  font-size: clamp(1.75rem, 5vw, 2.35rem);
-  line-height: 1.2;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5.4vw, 2.7rem);
+  line-height: 1.14;
   font-weight: 600;
-  letter-spacing: -0.015em;
-  margin: 0 0 20px;
+  letter-spacing: -0.004em;
+  margin: 0 0 22px;
   text-wrap: balance;
 }
 
 h2 {
-  font-size: 1.12rem;
+  font-family: var(--serif);
+  font-size: 1.32rem;
   font-weight: 600;
-  line-height: 1.35;
-  margin: 40px 0 10px;
+  line-height: 1.3;
+  letter-spacing: -0.003em;
+  margin: 46px 0 12px;
+  text-wrap: balance;
 }
 
-h3 { font-size: 1rem; font-weight: 600; margin: 26px 0 8px; }
-
-p { margin: 0 0 16px; }
-
-.lede { font-size: 1.1rem; color: var(--ink-soft); }
-
-ul { margin: 0 0 16px; padding-left: 1.25rem; }
-li { margin-bottom: 7px; }
-
-hr {
-  border: 0;
-  border-top: 1px solid var(--rule);
-  margin: 40px 0;
+h3 {
+  font-family: var(--sans);
+  font-size: 0.97rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  margin: 26px 0 8px;
 }
+
+p { margin: 0 0 17px; text-wrap: pretty; }
+
+.lede {
+  font-size: 1.14rem;
+  line-height: 1.58;
+  color: var(--ink-soft);
+  margin-bottom: 26px;
+}
+
+ul { margin: 0 0 17px; padding-left: 1.15rem; }
+li { margin-bottom: 10px; padding-left: 0.15rem; }
+li::marker { color: var(--accent); }
+li strong { font-weight: 600; }
+
+hr { border: 0; border-top: 1px solid var(--rule); margin: 44px 0; }
 
 .meta {
-  font-size: 0.86rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
   color: var(--ink-soft);
-  margin-top: 44px;
-  padding-top: 18px;
+  margin-top: 48px;
+  padding-top: 20px;
   border-top: 1px solid var(--rule);
 }
 
 .contact {
   background: var(--surface);
   border: 1px solid var(--rule);
-  border-radius: 3px;
-  padding: 20px 22px;
-  margin: 32px 0;
+  border-radius: 7px;
+  box-shadow: var(--shadow);
+  padding: 22px 24px;
+  margin: 34px 0;
 }
-.contact p { margin: 0 0 6px; }
+.contact p { margin: 0 0 9px; }
 .contact p:last-child { margin-bottom: 0; }
 
-/* Purpose / lawful basis table — stacks on narrow screens */
-.roles { margin: 0 0 24px; }
+/* Purpose / lawful basis cards — stack on narrow screens */
+.roles { margin: 0 0 26px; }
 .role {
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 7px;
   background: var(--surface);
-  padding: 16px 18px;
-  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+  margin-bottom: 12px;
 }
-.role h3 { margin: 0 0 8px; font-size: 0.98rem; }
-.role dl { margin: 0; display: grid; grid-template-columns: 7.5rem 1fr; gap: 4px 14px; }
+.role h3 { margin: 0 0 10px; font-size: 0.98rem; color: var(--accent); }
+.role dl { margin: 0; display: grid; grid-template-columns: 7.5rem 1fr; gap: 5px 14px; }
 .role dt {
-  font-size: 0.78rem;
+  font-size: 0.73rem;
   font-weight: 600;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  padding-top: 3px;
+  padding-top: 4px;
 }
-.role dd { margin: 0; font-size: 0.95rem; }
+.role dd { margin: 0; font-size: 0.95rem; line-height: 1.58; }
+
+/* Call to action — deliberately one fixed look in both themes */
+.cta {
+  background: var(--cta-bg);
+  border-radius: 9px;
+  padding: 30px 28px;
+  margin: 42px 0;
+}
+.cta h2 {
+  font-family: var(--serif);
+  margin: 0 0 10px;
+  color: #FFFFFF;
+  font-size: 1.42rem;
+  line-height: 1.26;
+}
+.cta p { margin: 0 0 22px; color: rgba(255, 255, 255, 0.88); }
+.cta p:last-child { margin: 0; }
+.btn {
+  display: inline-block;
+  background: #FFFFFF;
+  color: #0E4B4D;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: 0.005em;
+  padding: 13px 26px;
+  border-radius: 6px;
+  transition: background 120ms ease, transform 120ms ease;
+}
+.btn:hover { background: #EAF0EF; transform: translateY(-1px); }
+.btn:active { transform: none; }
+.btn:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; }
 
 @media (max-width: 30rem) {
+  body { font-size: 16.5px; }
+  .wrap { padding-block: 48px 64px; }
   .role dl { grid-template-columns: 1fr; gap: 2px; }
-  .role dt { padding-top: 8px; }
-  .wrap { padding-block: 44px 60px; }
+  .role dt { padding-top: 10px; }
+  .cta { padding: 24px 20px; }
+  .btn { display: block; text-align: center; }
 }
 
-.skip {
-  position: absolute; left: -9999px;
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  .btn:hover { transform: none; }
 }
-.skip:focus {
-  position: static; display: inline-block; margin-bottom: 12px;
-}
+
+.skip { position: absolute; left: -9999px; }
+.skip:focus { position: static; display: inline-block; margin-bottom: 12px; }
